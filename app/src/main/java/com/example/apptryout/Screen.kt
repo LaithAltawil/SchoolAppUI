@@ -5,8 +5,4 @@ sealed class Screen(val route:String){
     object Home: Screen("MainMenu")
     object ForgotPassword: Screen("ForgotPasswordPage")
     object ProfilePage:Screen("ProfilePage")
-
-
-
-
 }
