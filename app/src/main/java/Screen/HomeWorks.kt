@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,13 +25,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import com.example.apptryout.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePage() {
-    val navController = rememberNavController()
+fun Homeworks(){
+    val button = @androidx.compose.runtime.Composable { Button(onClick = { /*TODO*/ }) {
+
+    } }
     val profilepagetable = listOf(
         listOf("name :- ", "Laith"),
         listOf("email :- ", "john.tyler@examplepetstore.com"),
@@ -44,6 +44,7 @@ fun ProfilePage() {
         listOf("language :- ", "English"),
         listOf("religion :- ", "Christian"),
     )
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -78,48 +79,43 @@ fun ProfilePage() {
                 modifier = Modifier.padding(innerPadding),
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
-                Button(
-                    onClick = { /*TODO*/ }, modifier = Modifier
-                        .padding(16.dp)
-                        .size(300.dp)
-                ) {
-                    //Profile Picture instead
-                    Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Profile pic")
-
-                }
                 SimpleTable(tableData = profilepagetable)
 
+
+
+
+
+
             }
         }
 
 
     }
 
+    @Composable
+    fun RowScope.TableCell(
+        text: String,
+        weight: Float
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .weight(weight)
+                .padding(12.dp), fontSize = 20.sp, color = Color.White
+        )
+    }
 
-}
-
-@Composable
-fun RowScope.TableCell(
-    text: String,
-    weight: Float
-) {
-    Text(
-        text = text,
-        modifier = Modifier
-            .weight(weight)
-            .padding(12.dp), fontSize = 20.sp, color = Color.White
-    )
-}
-
-@Composable
-fun SimpleTable(tableData: List<List<Any>>) {
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(tableData.size) { rowIndex ->
-            Row(modifier = Modifier.fillMaxWidth()) {
-                tableData[rowIndex].forEach { cellText ->
-                    TableCell(text = cellText.toString(), weight = 1f)
+    @Composable
+    fun SimpleTable(tableData: List<List<String>>) {
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
+            items(tableData.size) { rowIndex ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    tableData[rowIndex].forEach { cellText ->
+                        TableCell(text = cellText, weight = 1f)
+                    }
                 }
             }
         }
     }
+
 }

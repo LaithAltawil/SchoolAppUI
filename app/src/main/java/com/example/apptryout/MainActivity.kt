@@ -1,6 +1,7 @@
 package com.example.apptryout
 
 import Navigation.Navigation
+import Screen.Homeworks
 import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.SignInPage
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTryoutTheme {
-                Navigation()
+                Homeworks()
 
 
             }
