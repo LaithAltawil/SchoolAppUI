@@ -1,6 +1,8 @@
 package Navigation
 
+import Screen.ExamsPage
 import Screen.Forgotpassword
+import Screen.Homeworks
 import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.SignInPage
@@ -26,11 +28,23 @@ fun Navigation(
             Forgotpassword()
         }
         composable(Screen.Home.route){
-            MainMenu(MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) })
+            MainMenu(MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) }
+            , MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
+                MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) }
+            )
         }
         composable(Screen.ProfilePage.route){
             ProfilePage()
         }
+        composable(Screen.ExamsPage.route){
+            ExamsPage()
+
+        }
+        composable(Screen.Homeworks.route){
+            Homeworks()
+
+        }
+
 
     }
 }

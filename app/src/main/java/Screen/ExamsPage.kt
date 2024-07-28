@@ -59,6 +59,17 @@ fun ExamsPage(){
         mainmenuitems("Settings", Icons.Default.Check, {})
 
     )
+    val exams = listOf(
+        listOf("subject :- ", "Laith"),
+        listOf("teacher :- ", "john.tyler@examplepetstore.com"),
+        listOf("what to study? :- ", "0123456789"),
+        listOf("address :- ", "123 Main Street"),
+        listOf("gender :- ", "Male"),
+        listOf("dob :- ", "01/01/2000"),
+        listOf("nationality :- ", "Kenyan"),
+        listOf("language :- ", "English"),
+        listOf("religion :- ", "Christian"),
+    )
     var showBottomSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
     
@@ -104,9 +115,10 @@ fun ExamsPage(){
                     items(mainmenuitem) { item ->
                         Card(
                              modifier = Modifier
-                                .padding(16.dp)
-                                .size(200.dp)
-                                .width(100.dp).clickable { showBottomSheet = true }
+                                 .padding(16.dp)
+                                 .size(200.dp)
+                                 .width(100.dp)
+                                 .clickable { showBottomSheet = true }
                         ) {
                             Column(
                                 modifier = Modifier
@@ -139,10 +151,11 @@ fun ExamsPage(){
                                         .fillMaxWidth()
                                         .padding(16.dp)
                                 ) {
-                                    Text("This is thebottom sheet")
-                                    Button(onClick = { showBottomSheet = false }) {
-                                        Text("Close")
-                                    }
+                                    SimpleTable(tableData =exams )
+
+
+
+
                                 }
                             }
                         }

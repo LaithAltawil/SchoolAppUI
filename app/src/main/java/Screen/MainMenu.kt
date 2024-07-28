@@ -43,13 +43,15 @@ import com.example.apptryout.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainMenu(
-    MoveToProfilePage:() -> Unit
+    MoveToProfilePage:() -> Unit,
+    MoveToExamsPage:() -> Unit,
+    MoveToHomeworksPage:() -> Unit,
 ) {
     val name = "Laith"
     val mainmenuitem = listOf(
         mainmenuitems("Account", Icons.Default.AccountBox) { MoveToProfilePage() },
-        mainmenuitems("Classes", Icons.Default.Check, {}),
-        mainmenuitems("Marks", Icons.Default.Create, {}),
+        mainmenuitems("Classes", Icons.Default.Check, {MoveToExamsPage()}),
+        mainmenuitems("Marks", Icons.Default.Create, {MoveToHomeworksPage()}),
         mainmenuitems("HomeWorks", Icons.Default.Home, {}),
         mainmenuitems("Profile", Icons.Default.AccountBox, {}),
         mainmenuitems("Settings", Icons.Default.Check, {})
