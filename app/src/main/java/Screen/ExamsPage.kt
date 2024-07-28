@@ -1,5 +1,6 @@
 package Screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,16 +18,24 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,6 +59,9 @@ fun ExamsPage(){
         mainmenuitems("Settings", Icons.Default.Check, {})
 
     )
+    var showBottomSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
+    
 
     Surface(
         modifier = Modifier
@@ -59,13 +71,13 @@ fun ExamsPage(){
         Scaffold(
             containerColor = colorResource(id = R.color.color_secondary),
             topBar = {
-                TopAppBar(
+                LargeTopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = colorResource(id = R.color.color_secondary),
                         titleContentColor = colorResource(id = R.color.color_light),
                     ),
                     title = {
-                        Text("Homeworks")
+                        Text("Exams")
                     },
                     navigationIcon = {
                         IconButton(onClick = { }) {
@@ -87,12 +99,14 @@ fun ExamsPage(){
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
+                    //here we will enter cards which will be the exams coming set in order from left to right depending of its date
+
                     items(mainmenuitem) { item ->
                         Card(
-                            onClick = {}, modifier = Modifier
+                             modifier = Modifier
                                 .padding(16.dp)
                                 .size(200.dp)
-                                .width(100.dp)
+                                .width(100.dp).clickable { showBottomSheet = true }
                         ) {
                             Column(
                                 modifier = Modifier
@@ -115,6 +129,24 @@ fun ExamsPage(){
                             }
 
                         }
+                        if (showBottomSheet) {
+                            ModalBottomSheet(
+                                onDismissRequest = { showBottomSheet = false }
+                            ) {
+                                // Bottom sheet content
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp)
+                                ) {
+                                    Text("This is thebottom sheet")
+                                    Button(onClick = { showBottomSheet = false }) {
+                                        Text("Close")
+                                    }
+                                }
+                            }
+                        }
+
 
                     }
 
@@ -126,4 +158,6 @@ fun ExamsPage(){
 
 
     }
+
+
 }
