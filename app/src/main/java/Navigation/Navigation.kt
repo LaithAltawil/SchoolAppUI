@@ -6,7 +6,13 @@ import Screen.Homeworks
 import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.SignInPage
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -16,6 +22,20 @@ import com.example.apptryout.Screen
 @Composable
 fun Navigation(
 ) {
+    fun NavBackStackEntry.slideInFromRight(duration: Int = 500): EnterTransition {
+        return slideInHorizontally(
+            initialOffsetX = { width -> width },
+            animationSpec = tween(durationMillis = duration)
+        )
+    }
+
+    fun NavBackStackEntry.slideOutToRight(duration: Int = 500): ExitTransition {
+        return slideOutHorizontally(
+            targetOffsetX = { width -> width },
+            animationSpec = tween(durationMillis = duration)
+        )
+    }
+
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.SignIn.route) {
@@ -24,23 +44,29 @@ fun Navigation(
                 OnNavigateToForgotPassword = { navController.navigate(Screen.ForgotPassword.route) }
             )
         }
-        composable(Screen.ForgotPassword.route){
+        composable(Screen.ForgotPassword.route) {
             Forgotpassword()
         }
-        composable(Screen.Home.route){
-            MainMenu(MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) }
-            , MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
+        composable(Screen.Home.route, enterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { width -> width },
+                animationSpec = tween(durationMillis = 500)
+            )
+        }, exitTransition = { null }) {
+            MainMenu(navController,
+                MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) },
+                MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
                 MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) }
             )
         }
-        composable(Screen.ProfilePage.route){
-            ProfilePage()
+        composable(Screen.ProfilePage.route) {
+            ProfilePage(navController)
         }
-        composable(Screen.ExamsPage.route){
+        composable(Screen.ExamsPage.route) {
             ExamsPage()
 
         }
-        composable(Screen.Homeworks.route){
+        composable(Screen.Homeworks.route) {
             Homeworks()
 
         }
@@ -48,3 +74,4 @@ fun Navigation(
 
     }
 }
+

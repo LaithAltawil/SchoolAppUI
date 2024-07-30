@@ -26,13 +26,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.apptryout.R
+import com.example.apptryout.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfilePage() {
-    val navController = rememberNavController()
+fun ProfilePage(navController: NavHostController) {
     val profilepagetable = listOf(
         listOf("name :- ", "Laith"),
         listOf("email :- ", "john.tyler@examplepetstore.com"),
@@ -60,7 +61,7 @@ fun ProfilePage() {
                     title = {
                     },
                     navigationIcon = {
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = {navController.navigate(Screen.Home.route)}) {
                             Icon(
                                 modifier = Modifier.size(50.dp),
                                 imageVector = Icons.AutoMirrored.Default.ArrowBack,
