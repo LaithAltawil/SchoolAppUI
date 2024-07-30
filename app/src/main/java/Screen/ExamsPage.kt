@@ -18,7 +18,6 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,7 +27,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -40,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,12 +50,12 @@ fun ExamsPage(){
     ///TODO: Add Exams Page here
     /// STILL NOT DONE
     val mainmenuitem = listOf(
-        mainmenuitems("Account", Icons.Default.AccountBox,{}),
-        mainmenuitems("Classes", Icons.Default.Check, {}),
-        mainmenuitems("Marks", Icons.Default.Create, {}),
-        mainmenuitems("HomeWorks", Icons.Default.Home, {}),
-        mainmenuitems("Profile", Icons.Default.AccountBox, {}),
-        mainmenuitems("Settings", Icons.Default.Check, {})
+        mainmenuitems("Account",  R.drawable.exam) { },
+        mainmenuitems("Classes", R.drawable.exam) { },
+        mainmenuitems("Marks", R.drawable.exam) {  },
+        mainmenuitems("HomeWorks", R.drawable.exam) {},
+        mainmenuitems("Profile", R.drawable.exam) {},
+        mainmenuitems("Settings", R.drawable.exam) {}
 
     )
     val exams = listOf(
@@ -114,11 +113,11 @@ fun ExamsPage(){
 
                     items(mainmenuitem) { item ->
                         Card(
-                             modifier = Modifier
-                                 .padding(16.dp)
-                                 .size(200.dp)
-                                 .width(100.dp)
-                                 .clickable { showBottomSheet = true }
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .size(200.dp)
+                                .width(100.dp)
+                                .clickable { showBottomSheet = true }
                         ) {
                             Column(
                                 modifier = Modifier
@@ -133,10 +132,7 @@ fun ExamsPage(){
                                     color = Color.White,
                                     textAlign = TextAlign.Center
                                 )
-                                Icon(
-                                    imageVector = item.ImagePath,
-                                    contentDescription = "Profile pic"
-                                )
+                                Icon(painter = painterResource(id = item.ImagePath), contentDescription ="" )
 
                             }
 
