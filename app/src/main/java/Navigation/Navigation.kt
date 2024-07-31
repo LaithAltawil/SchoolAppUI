@@ -46,11 +46,11 @@ fun Navigation(
             ProfilePage(navController)
         }
         composable(Screen.ExamsPage.route) {
-            ExamsPage()
+            ExamsPage(navController)
 
         }
         composable(Screen.Homeworks.route) {
-            Homeworks()
+            Homeworks(navController)
 
         }
 

@@ -1,5 +1,6 @@
 package Screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -100,7 +101,6 @@ fun MainMenu(
         }
 
 
-
     }, content = {
         Scaffold(
             modifier = Modifier, containerColor = colorResource(id = R.color.color_secondary),
@@ -137,7 +137,7 @@ fun MainMenu(
                             modifier = Modifier
                                 .padding(16.dp)
                                 .size(200.dp)
-                                .width(100.dp),
+                                .width(100.dp).clickable { item.onClick() },
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
@@ -158,7 +158,7 @@ fun MainMenu(
                             modifier = Modifier
                                 .padding(16.dp)
                                 .height(150.dp)
-                                .width(300.dp),
+                                .width(300.dp).clickable { item.onClick() },
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )

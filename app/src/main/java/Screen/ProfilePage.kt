@@ -61,7 +61,7 @@ fun ProfilePage(navController: NavHostController) {
                     title = {
                     },
                     navigationIcon = {
-                        IconButton(onClick = {navController.navigate(Screen.Home.route)}) {
+                        IconButton(onClick = {navController.popBackStack()}) {
                             Icon(
                                 modifier = Modifier.size(50.dp),
                                 imageVector = Icons.AutoMirrored.Default.ArrowBack,

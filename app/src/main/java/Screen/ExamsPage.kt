@@ -42,11 +42,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.apptryout.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExamsPage(){
+fun ExamsPage(navController: NavHostController){
     ///TODO: Add Exams Page here
     /// STILL NOT DONE
     val mainmenuitem = listOf(
@@ -90,7 +91,9 @@ fun ExamsPage(){
                         Text("Exams")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = {
+                            navController.popBackStack()
+                        }) {
                             Icon(
                                 modifier = Modifier.size(50.dp),
                                 imageVector = Icons.AutoMirrored.Default.ArrowBack,
