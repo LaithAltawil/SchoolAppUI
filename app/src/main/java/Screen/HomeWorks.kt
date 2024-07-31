@@ -42,12 +42,12 @@ import com.example.apptryout.R
 fun Homeworks() {
 
     val mainmenuitem = listOf(
-        mainmenuitems("Account",  R.drawable.exam) { },
-        mainmenuitems("Classes", R.drawable.exam) {  },
-        mainmenuitems("Marks", R.drawable.exam) {},
-        mainmenuitems("HomeWorks", R.drawable.exam) {},
-        mainmenuitems("Profile", R.drawable.exam) {},
-        mainmenuitems("Settings", R.drawable.exam) {}
+        mainmenuitems("Account", Icons.Default.AccountBox) {  },
+        mainmenuitems("Classes", Icons.Default.Check) {  },
+        mainmenuitems("Marks", Icons.Default.Create) {  },
+        mainmenuitems("HomeWorks", Icons.Default.Home) {},
+        mainmenuitems("Profile", Icons.Default.AccountBox) {},
+        mainmenuitems("Settings", Icons.Default.Check) {}
 
     )
 
@@ -107,7 +107,7 @@ fun Homeworks() {
                                     color = Color.White,
                                     textAlign = TextAlign.Center
                                 )
-                                Icon(painter = painterResource(id = item.ImagePath), contentDescription = "")
+                                Icon(imageVector = item.ImagePath, contentDescription = "")
                             }
 
                         }

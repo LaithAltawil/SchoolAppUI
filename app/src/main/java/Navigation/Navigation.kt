@@ -22,19 +22,6 @@ import com.example.apptryout.Screen
 @Composable
 fun Navigation(
 ) {
-    fun NavBackStackEntry.slideInFromRight(duration: Int = 500): EnterTransition {
-        return slideInHorizontally(
-            initialOffsetX = { width -> width },
-            animationSpec = tween(durationMillis = duration)
-        )
-    }
-
-    fun NavBackStackEntry.slideOutToRight(duration: Int = 500): ExitTransition {
-        return slideOutHorizontally(
-            targetOffsetX = { width -> width },
-            animationSpec = tween(durationMillis = duration)
-        )
-    }
 
     val navController = rememberNavController()
 
@@ -47,12 +34,8 @@ fun Navigation(
         composable(Screen.ForgotPassword.route) {
             Forgotpassword()
         }
-        composable(Screen.Home.route, enterTransition = {
-            slideInHorizontally(
-                initialOffsetX = { width -> width },
-                animationSpec = tween(durationMillis = 500)
-            )
-        }, exitTransition = { null }) {
+        composable(Screen.Home.route,
+            ) {
             MainMenu(navController,
                 MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) },
                 MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
