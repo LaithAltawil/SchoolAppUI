@@ -7,5 +7,5 @@ sealed class Screen(val route:String){
     object ProfilePage:Screen("ProfilePage")
     object ExamsPage:Screen("ExamsPage")
     object Homeworks:Screen("Homeworks")
-
+    object ConselorReq:Screen("ConselorReq")
 }

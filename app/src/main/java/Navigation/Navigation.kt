@@ -1,18 +1,13 @@
 package Navigation
 
+import Screen.CounselorReq
 import Screen.ExamsPage
 import Screen.Forgotpassword
 import Screen.Homeworks
 import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.SignInPage
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -39,7 +34,8 @@ fun Navigation(
             MainMenu(navController,
                 MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) },
                 MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
-                MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) }
+                MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) },
+                MoveToConselorReq = {navController.navigate(Screen.ConselorReq.route)}
             )
         }
         composable(Screen.ProfilePage.route) {
@@ -52,6 +48,9 @@ fun Navigation(
         composable(Screen.Homeworks.route) {
             Homeworks(navController)
 
+        }
+        composable(Screen.ConselorReq.route) {
+            CounselorReq(navController)
         }
 
 

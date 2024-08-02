@@ -15,8 +15,6 @@ import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -48,6 +46,7 @@ fun MainMenu(
     MoveToProfilePage: () -> Unit,
     MoveToExamsPage: () -> Unit,
     MoveToHomeworksPage: () -> Unit,
+    MoveToConselorReq: () -> Unit
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -57,7 +56,7 @@ fun MainMenu(
         mainmenuitems("Account", Icons.Default.AccountBox) { MoveToProfilePage() },
         mainmenuitems("Classes", Icons.Default.Check) { MoveToExamsPage() },
         mainmenuitems("Marks", Icons.Default.Create) { MoveToHomeworksPage() },
-        mainmenuitems("HomeWorks", Icons.Default.Home) {},
+        mainmenuitems("HomeWorks", Icons.Default.Home) {MoveToConselorReq()},
         mainmenuitems("Profile", Icons.Default.AccountBox) {},
         mainmenuitems("Settings", Icons.Default.Check) {}
 
