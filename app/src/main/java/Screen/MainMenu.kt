@@ -46,7 +46,8 @@ fun MainMenu(
     MoveToProfilePage: () -> Unit,
     MoveToExamsPage: () -> Unit,
     MoveToHomeworksPage: () -> Unit,
-    MoveToConselorReq: () -> Unit
+    MoveToConselorReq: () -> Unit,
+    MoveToResourcesPage: () -> Unit
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -56,8 +57,8 @@ fun MainMenu(
         mainmenuitems("Account", Icons.Default.AccountBox) { MoveToProfilePage() },
         mainmenuitems("Classes", Icons.Default.Check) { MoveToExamsPage() },
         mainmenuitems("Marks", Icons.Default.Create) { MoveToHomeworksPage() },
-        mainmenuitems("HomeWorks", Icons.Default.Home) {MoveToConselorReq()},
-        mainmenuitems("Profile", Icons.Default.AccountBox) {},
+        mainmenuitems("HomeWorks", Icons.Default.Home) { MoveToConselorReq() },
+        mainmenuitems("Profile", Icons.Default.AccountBox) {MoveToResourcesPage()},
         mainmenuitems("Settings", Icons.Default.Check) {}
 
     )
@@ -136,7 +137,8 @@ fun MainMenu(
                             modifier = Modifier
                                 .padding(16.dp)
                                 .size(200.dp)
-                                .width(100.dp).clickable { item.onClick() },
+                                .width(100.dp)
+                                .clickable { item.onClick() },
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
@@ -157,7 +159,8 @@ fun MainMenu(
                             modifier = Modifier
                                 .padding(16.dp)
                                 .height(150.dp)
-                                .width(300.dp).clickable { item.onClick() },
+                                .width(300.dp)
+                                .clickable { item.onClick() },
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
