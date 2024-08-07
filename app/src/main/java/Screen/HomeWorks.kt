@@ -43,12 +43,12 @@ import com.example.apptryout.R
 fun Homeworks(navController: NavHostController) {
 
     val mainmenuitem = listOf(
-        mainmenuitems("Account", Icons.Default.AccountBox) {  },
-        mainmenuitems("Classes", Icons.Default.Check) {  },
-        mainmenuitems("Marks", Icons.Default.Create) {  },
-        mainmenuitems("HomeWorks", Icons.Default.Home) {},
-        mainmenuitems("Profile", Icons.Default.AccountBox) {},
-        mainmenuitems("Settings", Icons.Default.Check) {}
+        mainmenuitems("Maths", painterResource(id = R.drawable.math)) {  },
+        mainmenuitems("Science", painterResource(id = R.drawable.science)) {  },
+        mainmenuitems("English", painterResource(id = R.drawable.english)) {  },
+        mainmenuitems("History", painterResource(id = R.drawable.history)) {},
+        mainmenuitems("Arabic", painterResource(id = R.drawable.arabic)) {},
+        mainmenuitems("Geography", painterResource(id = R.drawable.geography)) {}
 
     )
 
@@ -102,13 +102,14 @@ fun Homeworks(navController: NavHostController) {
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
+
+                                Icon(painter = item.ImagePath, contentDescription = "")
                                 Text(
                                     text = item.name,
                                     fontSize = 20.sp,
                                     color = Color.White,
                                     textAlign = TextAlign.Center
                                 )
-                                Icon(imageVector = item.ImagePath, contentDescription = "")
                             }
 
                         }

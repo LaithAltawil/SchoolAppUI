@@ -1,5 +1,6 @@
 package Screen
 
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,12 +52,12 @@ fun ExamsPage(navController: NavHostController){
     ///TODO: Add Exams Page here
     /// STILL NOT DONE
     val mainmenuitem = listOf(
-        mainmenuitems("Account", Icons.Default.AccountBox) {  },
-        mainmenuitems("Classes", Icons.Default.Check) { },
-        mainmenuitems("Marks", Icons.Default.Create) {  },
-        mainmenuitems("HomeWorks", Icons.Default.Home) {},
-        mainmenuitems("Profile", Icons.Default.AccountBox) {},
-        mainmenuitems("Settings", Icons.Default.Check) {}
+        mainmenuitems("Maths", painterResource(id = R.drawable.math)) {  },
+        mainmenuitems("Science", painterResource(id = R.drawable.science)) {  },
+        mainmenuitems("English", painterResource(id = R.drawable.english)) {  },
+        mainmenuitems("History", painterResource(id = R.drawable.history)) {},
+        mainmenuitems("Arabic", painterResource(id = R.drawable.arabic)) {},
+        mainmenuitems("Geography", painterResource(id = R.drawable.geography)) {}
 
     )
     val exams = listOf(
@@ -120,7 +121,9 @@ fun ExamsPage(navController: NavHostController){
                                 .padding(16.dp)
                                 .size(200.dp)
                                 .width(100.dp)
-                                .clickable { showBottomSheet = true }
+                                .clickable {
+                                   showBottomSheet=true
+                                }
                         ) {
                             Column(
                                 modifier = Modifier
@@ -129,13 +132,13 @@ fun ExamsPage(navController: NavHostController){
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Text(
+                                Text(modifier = Modifier.padding(10.dp,top = 40.dp),
                                     text = item.name,
-                                    fontSize = 20.sp,
+                                    fontSize = 16.sp,
                                     color = Color.White,
                                     textAlign = TextAlign.Center
                                 )
-                                Icon(imageVector = item.ImagePath, contentDescription = "")
+                                Icon(painter = item.ImagePath, contentDescription = "")
 
                             }
 

@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,12 +50,13 @@ import com.example.apptryout.R
 fun ResourcesPage(navController: NavHostController) {
 
     val mainmenuitem = listOf(
-        mainmenuitems("Math", Icons.Default.AccountBox) {},
-        mainmenuitems("English", Icons.Default.Check) {},
-        mainmenuitems("Science", Icons.Default.Create) {},
-        mainmenuitems("History", Icons.Default.Home) {},
-        mainmenuitems("Arabic", Icons.Default.AccountBox) {},
-        mainmenuitems("French", Icons.Default.Check) {}
+        mainmenuitems("Maths", painterResource(id = R.drawable.math)) {  },
+        mainmenuitems("Science", painterResource(id = R.drawable.science)) {  },
+        mainmenuitems("English", painterResource(id = R.drawable.english)) {  },
+        mainmenuitems("History", painterResource(id = R.drawable.history)) {},
+        mainmenuitems("Arabic", painterResource(id = R.drawable.arabic)) {},
+        mainmenuitems("Geography", painterResource(id = R.drawable.geography)) {}
+
     )
 
     val exams = listOf(
@@ -128,7 +130,7 @@ fun ResourcesPage(navController: NavHostController) {
                                     color = Color.White,
                                     textAlign = TextAlign.Center
                                 )
-                                Icon(imageVector = item.ImagePath, contentDescription = "")
+                                Icon(painter = item.ImagePath, contentDescription = "")
                             }
 
                         }

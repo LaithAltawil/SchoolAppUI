@@ -32,6 +32,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,13 +55,12 @@ fun MainMenu(
     val name = "Laith"
 
     val mainmenuitem = listOf(
-        mainmenuitems("Account", Icons.Default.AccountBox) { MoveToProfilePage() },
-        mainmenuitems("Classes", Icons.Default.Check) { MoveToExamsPage() },
-        mainmenuitems("Marks", Icons.Default.Create) { MoveToHomeworksPage() },
-        mainmenuitems("HomeWorks", Icons.Default.Home) { MoveToConselorReq() },
-        mainmenuitems("Profile", Icons.Default.AccountBox) {MoveToResourcesPage()},
-        mainmenuitems("Settings", Icons.Default.Check) {}
-
+        mainmenuitems("Account", painterResource(id = R.drawable.baseline_account_box_24)) { MoveToProfilePage() },
+        mainmenuitems("Classes", painterResource(id = R.drawable.baseline_schedule_24)) { MoveToExamsPage() },
+        mainmenuitems("Marks", painterResource(id = R.drawable.grade)) { MoveToHomeworksPage() },
+        mainmenuitems("HomeWorks", painterResource(id = R.drawable.homework)) { MoveToConselorReq() },
+        mainmenuitems("Profile", painterResource(id = R.drawable.baseline_account_box_24)) {MoveToResourcesPage()},
+        mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {}
     )
     ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
         ModalDrawerSheet {
@@ -165,6 +165,7 @@ fun MainMenu(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
                         ) {
+                            Icon(painter = item.ImagePath, contentDescription = item.name)
 
                         }
 
