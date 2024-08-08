@@ -1,11 +1,13 @@
 package Screen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -21,10 +23,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -55,11 +59,23 @@ fun MainMenu(
     val name = "Laith"
 
     val mainmenuitem = listOf(
-        mainmenuitems("Account", painterResource(id = R.drawable.baseline_account_box_24)) { MoveToProfilePage() },
-        mainmenuitems("Classes", painterResource(id = R.drawable.baseline_schedule_24)) { MoveToExamsPage() },
+        mainmenuitems(
+            "Account",
+            painterResource(id = R.drawable.baseline_account_box_24)
+        ) { MoveToProfilePage() },
+        mainmenuitems(
+            "Classes",
+            painterResource(id = R.drawable.baseline_schedule_24)
+        ) { MoveToExamsPage() },
         mainmenuitems("Marks", painterResource(id = R.drawable.grade)) { MoveToHomeworksPage() },
-        mainmenuitems("HomeWorks", painterResource(id = R.drawable.homework)) { MoveToConselorReq() },
-        mainmenuitems("Profile", painterResource(id = R.drawable.baseline_account_box_24)) {MoveToResourcesPage()},
+        mainmenuitems(
+            "HomeWorks",
+            painterResource(id = R.drawable.homework)
+        ) { MoveToConselorReq() },
+        mainmenuitems(
+            "Profile",
+            painterResource(id = R.drawable.baseline_account_box_24)
+        ) { MoveToResourcesPage() },
         mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {}
     )
     ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
@@ -105,7 +121,7 @@ fun MainMenu(
         Scaffold(
             modifier = Modifier, containerColor = colorResource(id = R.color.color_secondary),
             topBar = {
-                LargeTopAppBar(
+                MediumTopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = colorResource(id = R.color.color_secondary),
                         titleContentColor = colorResource(id = R.color.color_light),
@@ -113,7 +129,7 @@ fun MainMenu(
                     title = {
                         Text(
                             "Welcome ${name}",
-                            overflow = TextOverflow.Ellipsis, fontSize = 40.sp
+                            overflow = TextOverflow.Ellipsis, fontSize = 30.sp
                         )
                     },
                     navigationIcon = {
@@ -131,24 +147,29 @@ fun MainMenu(
             },
         ) {
             Column(modifier = Modifier.padding(it)) {
-                LazyRow(modifier = Modifier.padding(top = 25.dp)) {
-                    items(mainmenuitem) { item ->
-                        Card(
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .size(200.dp)
-                                .width(100.dp)
-                                .clickable { item.onClick() },
-                            colors = androidx.compose.material3.CardDefaults.cardColors(
-                                containerColor = colorResource(id = R.color.color_primary)
-                            )
-                        ) {
 
-                        }
+                Card(
+                    modifier = Modifier
+                        .height(200.dp)
+                        .width(400.dp)
+                        .wrapContentSize(Alignment.Center),
+                    colors = androidx.compose.material3.CardDefaults.cardColors(
+                        containerColor = colorResource(id = R.color.color_primary)
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(300.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
 
 
                     }
+
                 }
+
 
                 LazyColumn(
                     modifier = Modifier.padding(start = 30.dp, end = 0.dp),
@@ -160,12 +181,26 @@ fun MainMenu(
                                 .padding(16.dp)
                                 .height(150.dp)
                                 .width(300.dp)
-                                .clickable { item.onClick() },
+                                .clickable { item.onClick() }
+                                .wrapContentSize(Alignment.Center),
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
                         ) {
-                            Icon(painter = item.ImagePath, contentDescription = item.name)
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .size(300.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Icon(
+                                    painter = item.ImagePath,
+                                    contentDescription = item.name,
+                                    modifier = Modifier.size(80.dp)
+                                )
+                                Text(text = item.name, fontSize = 20.sp)
+                            }
 
                         }
 
