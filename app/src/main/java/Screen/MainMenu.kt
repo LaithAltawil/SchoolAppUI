@@ -129,7 +129,8 @@ fun MainMenu(
                     title = {
                         Text(
                             "Welcome ${name}",
-                            overflow = TextOverflow.Ellipsis, fontSize = 30.sp
+                            overflow = TextOverflow.Visible, fontSize = 35.sp,
+                            modifier = Modifier.padding(start = 30.dp)
                         )
                     },
                     navigationIcon = {
