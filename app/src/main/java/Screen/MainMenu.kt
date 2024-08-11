@@ -52,7 +52,8 @@ fun MainMenu(
     MoveToExamsPage: () -> Unit,
     MoveToHomeworksPage: () -> Unit,
     MoveToConselorReq: () -> Unit,
-    MoveToResourcesPage: () -> Unit
+    MoveToResourcesPage: () -> Unit,
+    MoveToCalanderPage: () -> Unit
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -76,7 +77,9 @@ fun MainMenu(
             "Profile",
             painterResource(id = R.drawable.baseline_account_box_24)
         ) { MoveToResourcesPage() },
-        mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {}
+        mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {
+            MoveToCalanderPage()
+        }
     )
     ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
         ModalDrawerSheet {

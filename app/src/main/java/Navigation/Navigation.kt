@@ -8,6 +8,7 @@ import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.ResourcesPage
 import Screen.SignInPage
+import Screen.calanderPage
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,7 +38,8 @@ fun Navigation(
                 MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
                 MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) },
                 MoveToConselorReq = {navController.navigate(Screen.ConselorReq.route)},
-                MoveToResourcesPage = {navController.navigate(Screen.ResourcesPage.route)}
+                MoveToResourcesPage = {navController.navigate(Screen.ResourcesPage.route)},
+                MoveToCalanderPage = {navController.navigate(Screen.CalenderPage.route)}
             )
         }
 
@@ -59,6 +61,9 @@ fun Navigation(
 
         composable(Screen.ResourcesPage.route){
             ResourcesPage(navController)
+        }
+        composable(Screen.CalenderPage.route){
+            calanderPage(navController)
         }
 
 
