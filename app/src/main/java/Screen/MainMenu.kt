@@ -2,7 +2,10 @@ package Screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +30,7 @@ import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -53,7 +57,8 @@ fun MainMenu(
     MoveToHomeworksPage: () -> Unit,
     MoveToConselorReq: () -> Unit,
     MoveToResourcesPage: () -> Unit,
-    MoveToCalanderPage: () -> Unit
+    MoveToCalanderPage: () -> Unit,
+    MoveToSettingsPage: () -> Unit
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -61,62 +66,116 @@ fun MainMenu(
 
     val mainmenuitem = listOf(
         mainmenuitems(
-            "Account",
-            painterResource(id = R.drawable.baseline_account_box_24)
-        ) { MoveToProfilePage() },
+            "Account", painterResource(id = R.drawable.baseline_account_box_24)
+        ) {
+            MoveToProfilePage()
+        },
         mainmenuitems(
-            "Classes",
-            painterResource(id = R.drawable.baseline_schedule_24)
-        ) { MoveToExamsPage() },
-        mainmenuitems("Marks", painterResource(id = R.drawable.grade)) { MoveToHomeworksPage() },
+            "Classes", painterResource(id = R.drawable.baseline_schedule_24)
+        ) {
+            MoveToExamsPage()
+        },
+        mainmenuitems("Marks", painterResource(id = R.drawable.grade))
+        {
+            MoveToHomeworksPage()
+        },
         mainmenuitems(
-            "HomeWorks",
-            painterResource(id = R.drawable.homework)
-        ) { MoveToConselorReq() },
+            "HomeWorks", painterResource(id = R.drawable.homework)
+        ) {
+            MoveToConselorReq()
+        },
         mainmenuitems(
-            "Profile",
-            painterResource(id = R.drawable.baseline_account_box_24)
-        ) { MoveToResourcesPage() },
-        mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {
+            "Profile", painterResource(id = R.drawable.baseline_account_box_24)
+        ) {
+            MoveToResourcesPage()
+        },
+        mainmenuitems("calender", painterResource(id = R.drawable.baseline_calendar_view_week_24))
+        {
             MoveToCalanderPage()
+        },
+        mainmenuitems("Settings", painterResource(id = R.drawable.baseline_settings_24)) {
+            MoveToSettingsPage()
         }
     )
     ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
         ModalDrawerSheet {
-            Column {
-                Card(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .height(150.dp)
-                        .width(300.dp),
-                    colors = androidx.compose.material3.CardDefaults.cardColors(
-                        containerColor = colorResource(id = R.color.color_primary)
-                    )
-                ) {}
-                LazyColumn(
-                    modifier = Modifier.padding(start = 30.dp, end = 0.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    items(mainmenuitem) { item ->
-                        Card(
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .height(150.dp)
-                                .width(300.dp),
-                            colors = androidx.compose.material3.CardDefaults.cardColors(
-                                containerColor = colorResource(id = R.color.color_primary)
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                containerColor = colorResource(id = R.color.color_secondary),
+                topBar = {
+                    TopAppBar(
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = colorResource(id = R.color.color_secondary),
+                            titleContentColor = colorResource(id = R.color.color_light),
+                        ),
+                        title = {
+                            Text(
+                                "",
+                                overflow = TextOverflow.Visible, fontSize = 35.sp,
+                                modifier = Modifier.padding(start = 30.dp)
                             )
+                        },
+
+                        )
+                },
+            ) {
+                Column(modifier = Modifier.padding(it)) {
+                    Card(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .height(70.dp)
+                            .width(300.dp)
+                            .clickable { MoveToProfilePage() },
+                        colors = androidx.compose.material3.CardDefaults.cardColors(
+                            containerColor = colorResource(id = R.color.color_secondary)
+                        )
+                    ) {
+                        Row(
+                            horizontalArrangement = SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_account_box_24),
+                                modifier = Modifier
+                                    .size(70.dp)
+                                    .padding(top = 5.dp, bottom = 5.dp),
+                                contentDescription = "",
+                                tint = colorResource(id = R.color.color_light)
+                            )
+                            Text(
+                                text = "Laith",
+                                fontSize = 30.sp,
+                                color = colorResource(id = R.color.color_light)
+                            )
+
+
+                        }
+                    }
+                    LazyColumn(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        items(mainmenuitem) { item ->
+                            Card(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .height(100.dp)
+                                    .width(300.dp),
+                                colors = androidx.compose.material3.CardDefaults.cardColors(
+                                    containerColor = colorResource(id = R.color.color_primary)
+                                )
+                            ) {
+
+                            }
 
                         }
 
                     }
 
+
                 }
 
-
             }
-
         }
 
 
@@ -201,9 +260,14 @@ fun MainMenu(
                                 Icon(
                                     painter = item.ImagePath,
                                     contentDescription = item.name,
-                                    modifier = Modifier.size(80.dp)
+                                    modifier = Modifier.size(80.dp),
+                                    tint = colorResource(id = R.color.color_light)
                                 )
-                                Text(text = item.name, fontSize = 20.sp)
+                                Text(
+                                    text = item.name,
+                                    fontSize = 20.sp,
+                                    color = colorResource(id = R.color.color_light)
+                                )
                             }
 
                         }

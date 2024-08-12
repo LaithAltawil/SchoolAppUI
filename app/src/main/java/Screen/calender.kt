@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
@@ -48,6 +49,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -125,8 +127,11 @@ fun calanderPage(
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 LazyColumn {
-                    items(exams.size) {
-                        ExpandableButton("hello")
+                    items(mainmenuitem) { item ->
+                        ExpandableButton(name = item.name, icon = item.ImagePath) {
+
+                        }
+
                     }
                 }
 
@@ -141,7 +146,8 @@ fun calanderPage(
 
 
 @Composable
-fun ExpandableButton(date: String) {
+fun ExpandableButton(name: String, icon: Painter, onClick: () -> Unit) {
+
     var expanded by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
@@ -157,9 +163,8 @@ fun ExpandableButton(date: String) {
                 contentColor = colorResource(id = R.color.color_light)
             )
 
-
         ) {
-            Text(date)
+            Text(text = name)
         }
         Spacer(modifier = Modifier.fillMaxWidth())
         AnimatedVisibility(

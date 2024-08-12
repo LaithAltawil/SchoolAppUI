@@ -9,6 +9,7 @@ import Screen.ProfilePage
 import Screen.ResourcesPage
 import Screen.SignInPage
 import Screen.calanderPage
+import Screen.settingspage
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,15 +32,17 @@ fun Navigation(
         composable(Screen.ForgotPassword.route) {
             Forgotpassword()
         }
-        composable(Screen.Home.route,
-            ) {
+        composable(
+            Screen.Home.route,
+        ) {
             MainMenu(navController,
                 MoveToProfilePage = { navController.navigate(Screen.ProfilePage.route) },
                 MoveToExamsPage = { navController.navigate(Screen.ExamsPage.route) },
                 MoveToHomeworksPage = { navController.navigate(Screen.Homeworks.route) },
-                MoveToConselorReq = {navController.navigate(Screen.ConselorReq.route)},
-                MoveToResourcesPage = {navController.navigate(Screen.ResourcesPage.route)},
-                MoveToCalanderPage = {navController.navigate(Screen.CalenderPage.route)}
+                MoveToConselorReq = { navController.navigate(Screen.ConselorReq.route) },
+                MoveToResourcesPage = { navController.navigate(Screen.ResourcesPage.route) },
+                MoveToCalanderPage = { navController.navigate(Screen.CalenderPage.route) },
+                MoveToSettingsPage = { navController.navigate(Screen.SettingsPage.route) }
             )
         }
 
@@ -59,11 +62,15 @@ fun Navigation(
             CounselorReq(navController)
         }
 
-        composable(Screen.ResourcesPage.route){
+        composable(Screen.ResourcesPage.route) {
             ResourcesPage(navController)
         }
-        composable(Screen.CalenderPage.route){
+        composable(Screen.CalenderPage.route) {
             calanderPage(navController)
+        }
+        composable(Screen.SettingsPage.route) {
+            settingspage(navController)
+
         }
 
 
