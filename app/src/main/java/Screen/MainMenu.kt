@@ -80,7 +80,7 @@ fun MainMenu(
             MoveToHomeworksPage()
         },
         mainmenuitems(
-            "HomeWorks", painterResource(id = R.drawable.homework)
+            "Counselor appointment", painterResource(id = R.drawable.icons8_counselor_50)
         ) {
             MoveToConselorReq()
         },

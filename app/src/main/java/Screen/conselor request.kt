@@ -35,6 +35,15 @@ import androidx.navigation.NavHostController
 import com.example.apptryout.R
 import android.app.DatePickerDialog
 import android.content.Context
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,19 +54,39 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun CounselorReq(navController: NavHostController) {
-    var username = ""
-   val context = LocalContext.current
+    var username by remember { mutableStateOf("") }
+    val context = LocalContext.current
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+    var selectedDate by remember { mutableStateOf("") }
+    val datePicker = DatePickerDialog(
+        context, // or context if you're not in an Activity
+        { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+            selectedDate = dateFormat.format(calendar.time)
+            val sharedPrefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+            editor.putString("selected_date", formattedDate)
+            editor.apply()
+        },
+        year,
+        month,
+        dayOfMonth
+    )
+    var showDialog by remember { mutableStateOf(false) }
+
 
     Surface(
         color = colorResource(id = R.color.color_secondary),
         modifier = Modifier.fillMaxSize()
     ) {
         Scaffold(
-            modifier = Modifier, containerColor = colorResource(id = R.color.color_secondary),
+            modifier = Modifier.padding(top=32.dp), containerColor = colorResource(id = R.color.color_secondary),
             topBar = {
                 LargeTopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -88,13 +117,19 @@ fun CounselorReq(navController: NavHostController) {
                 modifier = Modifier
                     .padding(it)
                     .imePadding()
-                    .imeNestedScroll()
+                    .imeNestedScroll(),
+                horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
                     label = { Text(text = "Username") },
-                    placeholder = { Text(text = "Enter Username") },
+                    placeholder = {
+                        Text(
+                            text = "Enter Username",
+                            color = colorResource(id = R.color.color_light)
+                        )
+                    },
                     modifier = Modifier
                         .padding(36.dp)
                         .fillMaxWidth()
@@ -102,7 +137,7 @@ fun CounselorReq(navController: NavHostController) {
                         .imeNestedScroll(),
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when focused
-                        unfocusedBorderColor = Color.Gray, // Color of the border when not focused
+                        unfocusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when not focused
                         focusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when focused
                         unfocusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when not focused
                         cursorColor = colorResource(id = R.color.color_light), // Color of the cursor
@@ -110,29 +145,56 @@ fun CounselorReq(navController: NavHostController) {
                         unfocusedTextColor = colorResource(id = R.color.color_light)
                     ), singleLine = true
                 )
-
-
-
-
-                val datePicker = DatePickerDialog(
-                    context, // or context if you're not in an Activity
-                    { _, year, month, dayOfMonth ->
-                        val calendar = Calendar.getInstance()
-                        calendar.set(year, month, dayOfMonth)
-                        val dateFormat = SimpleDateFormat("yyyy-MM-dd", getDefault())
-                        val formattedDate = dateFormat.format(calendar.time)
-
-                        val sharedPrefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                        val editor = sharedPrefs.edit()
-                        editor.putString("selected_date", formattedDate)
-                        editor.apply()
-                    },
-                    year,
-                    month,
-                    dayOfMonth
-                )
-                datePicker.show()
-
+                Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                    Button(
+                        onClick = { datePicker.show() },
+                        modifier = Modifier.padding(16.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(id = R.color.color_primary), // Change the background color
+                            contentColor = colorResource(id = R.color.color_light) // Change the text color
+                        )
+                    ) {
+                        Text(text = "Select Date")
+                    }
+                    Text(
+                        text = "Selected Date: $selectedDate",
+                        modifier = Modifier.padding(16.dp),
+                        fontSize = 20.sp,
+                        overflow = TextOverflow.Ellipsis,
+                        color = colorResource(id = R.color.color_light)
+                    )
+                }
+                Button(
+                    onClick = { showDialog = true },
+                    modifier = Modifier.padding(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.color_primary), // Change the background color
+                        contentColor = colorResource(id = R.color.color_light) // Change the text color
+                    )
+                ) {
+                    Text("Show Dialog")
+                }
+                if (showDialog) {
+                    AlertDialog(
+                        onDismissRequest = { showDialog = false },
+                        title = { Text("Confirmation") },
+                        text = { Text("Are you sure you want to select this date for your appointment?") },
+                        confirmButton = {
+                            Button(onClick = {
+                                // Handle confirmation action
+                                navController.popBackStack()
+                                showDialog = false
+                            }) {
+                                Text("Confirm")
+                            }
+                        },
+                        dismissButton = {
+                            Button(onClick = { showDialog = false }) {
+                                Text("Cancel")
+                            }
+                        }
+                    )
+                }
 
 
             }
