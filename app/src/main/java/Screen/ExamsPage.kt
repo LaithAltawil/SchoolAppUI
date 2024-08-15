@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -48,13 +50,13 @@ import com.example.apptryout.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExamsPage(navController: NavHostController){
+fun ExamsPage(navController: NavHostController) {
     ///TODO: Add Exams Page here
     /// STILL NOT DONE
     val mainmenuitem = listOf(
-        mainmenuitems("Maths", painterResource(id = R.drawable.math)) {  },
-        mainmenuitems("Science", painterResource(id = R.drawable.science)) {  },
-        mainmenuitems("English", painterResource(id = R.drawable.english)) {  },
+        mainmenuitems("Maths", painterResource(id = R.drawable.math)) { },
+        mainmenuitems("Science", painterResource(id = R.drawable.science)) { },
+        mainmenuitems("English", painterResource(id = R.drawable.english)) { },
         mainmenuitems("History", painterResource(id = R.drawable.history)) {},
         mainmenuitems("Arabic", painterResource(id = R.drawable.arabic)) {},
         mainmenuitems("Geography", painterResource(id = R.drawable.geography)) {}
@@ -73,7 +75,7 @@ fun ExamsPage(navController: NavHostController){
     )
     var showBottomSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
-    
+
 
     Surface(
         modifier = Modifier
@@ -116,13 +118,16 @@ fun ExamsPage(navController: NavHostController){
                     //here we will enter cards which will be the exams coming set in order from left to right depending of its date
 
                     items(mainmenuitem) { item ->
-                        Card(
+                        Card(colors = CardDefaults.cardColors(
+                            containerColor = colorResource(id = R.color.color_primary)
+                        ),
+
                             modifier = Modifier
                                 .padding(16.dp)
                                 .size(200.dp)
                                 .width(100.dp)
                                 .clickable {
-                                   showBottomSheet=true
+                                    showBottomSheet = true
                                 }
                         ) {
                             Column(
@@ -132,19 +137,21 @@ fun ExamsPage(navController: NavHostController){
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Text(modifier = Modifier.padding(10.dp,top = 40.dp),
+                                Text(
+                                    modifier = Modifier.padding(10.dp, top = 40.dp),
                                     text = item.name,
                                     fontSize = 16.sp,
                                     color = Color.White,
-                                    textAlign = TextAlign.Center
+                                    textAlign = TextAlign.Center,
+                                    overflow = TextOverflow.Ellipsis
                                 )
-                                Icon(painter = item.ImagePath, contentDescription = "")
+                                Icon(painter = item.ImagePath, contentDescription = "",tint = Color.White)
 
                             }
 
                         }
                         if (showBottomSheet) {
-                            ModalBottomSheet(
+                            ModalBottomSheet(containerColor = colorResource(id = R.color.color_primary),
                                 onDismissRequest = { showBottomSheet = false }
                             ) {
                                 // Bottom sheet content
@@ -153,9 +160,7 @@ fun ExamsPage(navController: NavHostController){
                                         .fillMaxWidth()
                                         .padding(16.dp)
                                 ) {
-                                    SimpleTable(tableData =exams )
-
-
+                                    SimpleTable(tableData = exams)
 
 
                                 }

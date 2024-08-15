@@ -65,29 +65,12 @@ fun calanderPage(
     navController: NavHostController
 ) {
 
-    val mainmenuitem = listOf(
-        mainmenuitems("Maths", painterResource(id = R.drawable.math)) { },
-        mainmenuitems("Science", painterResource(id = R.drawable.science)) { },
-        mainmenuitems("English", painterResource(id = R.drawable.english)) { },
-        mainmenuitems("History", painterResource(id = R.drawable.history)) {},
-        mainmenuitems("Arabic", painterResource(id = R.drawable.arabic)) {},
-        mainmenuitems("Geography", painterResource(id = R.drawable.geography)) {}
-
+    val calendarItems = listOf(
+        CalenderDays("13/9","A huge Open Day for jobs in tech for the future",{}),
+        CalenderDays("14/9","A huge Open Day for jobs in medicine for the future",{}),
+        CalenderDays("15/9","A huge Open Day for jobs in finance for the future",{}),
+        CalenderDays("16/9","A huge Open Day for jobs in teaching for the future",{}),
     )
-    val exams = listOf(
-        listOf("subject :- ", "Laith"),
-        listOf("teacher :- ", "john.tyler@examplepetstore.com"),
-        listOf("what to study? :- ", "0123456789"),
-        listOf("address :- ", "123 Main Street"),
-        listOf("gender :- ", "Male"),
-        listOf("dob :- ", "01/01/2000"),
-        listOf("nationality :- ", "Kenyan"),
-        listOf("language :- ", "English"),
-        listOf("religion :- ", "Christian"),
-    )
-    var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState()
-
 
     Surface(
         modifier = Modifier
@@ -127,8 +110,8 @@ fun calanderPage(
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 LazyColumn {
-                    items(mainmenuitem) { item ->
-                        ExpandableButton(name = item.name, icon = item.ImagePath) {
+                    items(calendarItems) { item ->
+                        ExpandableButton(name = item.day, Text = item.event) {
 
                         }
 
@@ -146,7 +129,7 @@ fun calanderPage(
 
 
 @Composable
-fun ExpandableButton(name: String, icon: Painter, onClick: () -> Unit) {
+fun ExpandableButton(name: String, Text: String, onClick: () -> Unit) {
 
     var expanded by remember { mutableStateOf(false) }
     Column(
@@ -177,7 +160,7 @@ fun ExpandableButton(name: String, icon: Painter, onClick: () -> Unit) {
                 contentColor = colorResource(id = R.color.color_secondary)
             )) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text("This is the expanded box content.")
+                    Text(Text)
                     // Add more content to the box here
                 }
             }

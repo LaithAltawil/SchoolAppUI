@@ -70,7 +70,7 @@ fun settingspage(navController: NavHostController) {
             .fillMaxWidth()
             .fillMaxSize(), color = colorResource(id = R.color.color_secondary)
     ) {
-        Scaffold(
+        Scaffold(modifier = Modifier.fillMaxSize().padding(10.dp),
             containerColor = colorResource(id = R.color.color_secondary),
             topBar = {
                 LargeTopAppBar(
@@ -100,13 +100,13 @@ fun settingspage(navController: NavHostController) {
         ) { innerPadding ->
             Column(
                 modifier = Modifier.padding(innerPadding),
-                horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 LazyColumn {
                     items(mainmenuitem) { item ->
-                        ExpandableButton(name = item.name, icon = item.ImagePath) {
+                        ExpandableButton(name = item.name, Text ="")  {
 
-                        }
+                    }
 
                     }
                 }

@@ -7,6 +7,12 @@ data class mainmenuitems(
     val ImagePath: Painter,
     val onClick:() -> Unit
     )
+data class CalenderDays(
+    val day:String,
+    val event:String,
+    val onClick:() -> Unit
+
+)
 
 
 

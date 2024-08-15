@@ -8,6 +8,7 @@ import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.ResourcesPage
 import Screen.SignInPage
+import Screen.Stack035
 import Screen.calanderPage
 import Screen.settingspage
 import androidx.compose.runtime.Composable
@@ -69,9 +70,10 @@ fun Navigation(
             calanderPage(navController)
         }
         composable(Screen.SettingsPage.route) {
-            settingspage(navController)
+            Stack035()
 
         }
+
 
 
     }
