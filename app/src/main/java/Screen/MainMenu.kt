@@ -1,5 +1,11 @@
 package Screen
 
+//TODO
+//FIND AN IDEA ON HOW TO DISPLAY THE SUBJECT CLASSES TIMES IN CLASSES PAGE
+//FIND AN IDEA ON HOW TO DISPLAY MARKS IN MARKS PAGE
+//FIND AN ITDEA ON WHEN TO DO WITH THE SETTINGS PAGE
+
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween
@@ -58,13 +64,18 @@ fun MainMenu(
     MoveToConselorReq: () -> Unit,
     MoveToResourcesPage: () -> Unit,
     MoveToCalanderPage: () -> Unit,
-    MoveToSettingsPage: () -> Unit
+    MoveToSettingsPage: () -> Unit,
+    MoveToHomeworks2Page: () -> Unit
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val name = "Laith"
 
     val mainmenuitem = listOf(
+        mainmenuitems("Homeworks", painterResource(id = R.drawable.homework)) {
+            MoveToHomeworks2Page()
+        },
+
         mainmenuitems(
             "Account", painterResource(id = R.drawable.baseline_account_box_24)
         ) {

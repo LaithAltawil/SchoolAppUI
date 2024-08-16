@@ -43,7 +43,8 @@ fun Navigation(
                 MoveToConselorReq = { navController.navigate(Screen.ConselorReq.route) },
                 MoveToResourcesPage = { navController.navigate(Screen.ResourcesPage.route) },
                 MoveToCalanderPage = { navController.navigate(Screen.CalenderPage.route) },
-                MoveToSettingsPage = { navController.navigate(Screen.SettingsPage.route) }
+                MoveToSettingsPage = { navController.navigate(Screen.SettingsPage.route) },
+                MoveToHomeworks2Page = {navController.navigate(Screen.HomeworksPage.route)}
             )
         }
 
@@ -70,9 +71,11 @@ fun Navigation(
             calanderPage(navController)
         }
         composable(Screen.SettingsPage.route) {
-            Stack035()
+            settingspage(navController)
 
         }
+        composable(Screen.HomeworksPage.route) {
+            Stack035(navController)}
 
 
 
