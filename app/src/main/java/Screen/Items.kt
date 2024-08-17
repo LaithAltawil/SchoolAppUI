@@ -19,10 +19,10 @@ data class Homeworks(
     val Details: String,
 )
 
-data class CardData(
+data class HomeworkCardData(
     val title: String,
     val content: String,
-    var isExpanded: Boolean = false
+    var isExpanded: Boolean=false
 )
 
 

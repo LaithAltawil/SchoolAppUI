@@ -5,7 +5,9 @@ import android.content.Intent
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,6 +41,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -62,25 +65,31 @@ import java.io.InputStream
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Stack035(navController: NavController) {
-    var expanded by remember { mutableStateOf(false) }
 
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val uri = result.data?.data // The selected file's URI
-            // Handle the URI and save the file to the database
-        }
+//to open file picker
+
+
+    val cardlist = remember {
+        mutableStateListOf(
+            HomeworkCardData("Mathematics",
+                "Complete exercises 1-10 on page 35"),
+            HomeworkCardData("History",
+                "Write a short essay on the French Revolution"),
+            HomeworkCardData(
+                "Science",
+                "Prepare for the lab experiment on photosynthesis",),
+            HomeworkCardData(
+                "English",
+                "Read chapters 4 and 5 of 'To Kill a Mockingbird'",),
+            HomeworkCardData("Art",
+                "Finish the still life painting"),
+            HomeworkCardData("Music",
+                "Practice scales and arpeggios for 30 minutes"),
+            HomeworkCardData(
+                "Physical Education",
+                "Complete the workout routine posted online")
+        )
     }
-    val homeworkList = listOf(
-        Homeworks("Mathematics", "Complete exercises 1-10 on page 35."),
-        Homeworks("History", "Write a short essay on the French Revolution."),
-        Homeworks("Science", "Prepare for the lab experiment on photosynthesis."),
-        Homeworks("English", "Read chapters 4 and 5 of 'To Kill a Mockingbird'."),
-        Homeworks("Art", "Finish the still life painting."),
-        Homeworks("Music", "Practice scales and arpeggios for 30 minutes."),
-        Homeworks("Physical Education", "Complete the workout routine posted online.")
-    )
 
     Surface(
         modifier = Modifier
@@ -120,51 +129,8 @@ fun Stack035(navController: NavController) {
                 horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
             ) {
                 LazyColumn {
-                    items(homeworkList) { item ->
-                        Card(
-                            colors = CardDefaults.cardColors(
-                                containerColor = colorResource(id = R.color.color_primary),
-                                contentColor = colorResource(id = R.color.color_light)
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .clickable { expanded = !expanded },
-                            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .padding(16.dp)
-                            ) {
-                                Text(
-                                    text = item.Subject,
-                                    style = MaterialTheme.typography.headlineSmall
-                                )
-
-                                if (expanded) {
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                    Text(
-                                        text = item.Details,
-                                        style = MaterialTheme.typography.bodyMedium
-                                    )
-                                    Button(onClick = {
-                                        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                                            addCategory(Intent.CATEGORY_OPENABLE)
-                                            type = "*/*" // Allow all file types
-                                        }
-                                        launcher.launch(intent)
-                                    }, colors = ButtonDefaults.buttonColors(
-                                        containerColor = colorResource(id = R.color.color_secondary),
-                                        contentColor = colorResource(id = R.color.color_light)
-                                    )) {
-                                        Text("Upload File")
-                                    }
-                                }
-                            }
-
-
-                        }
-
+                    items(cardlist) { cardlist ->
+                        ExpandableCard(cardlist)
                     }
                 }
 
@@ -174,6 +140,64 @@ fun Stack035(navController: NavController) {
 
 
     }
+}
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun ExpandableCard(cardData: HomeworkCardData) {
+
+        val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val uri = result.data?.data // The selected file's URI
+            // Handle the URI and save the file to the database
+        }
+    }
+    var isExpanded by remember { mutableStateOf(false) }
+
+        Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .combinedClickable { isExpanded = !isExpanded },
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.color_primary),
+            contentColor = colorResource(id = R.color.color_light)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = cardData.title,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            if (isExpanded) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = cardData.content,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Button(
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            type = "*/*" // Allow all file types
+                        }
+                        launcher.launch(intent)
+                    }, colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.color_secondary),
+                        contentColor = colorResource(id = R.color.color_light)
+                    )
+                ) {
+                    Text("Upload File")
+                }
+
+            }
+        }
+    }
+}
 
 //TODO//
 
@@ -204,4 +228,3 @@ fun Stack035(navController: NavController) {
 //        Text(text = "How many lines in the files == ${linesCount.value}")
 //
 //    }
-}

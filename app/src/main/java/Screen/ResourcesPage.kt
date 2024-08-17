@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -111,7 +112,14 @@ fun ResourcesPage(navController: NavHostController) {
                 LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
                     items(mainmenuitem) { item ->
                         Card(
-                            onClick = {}, modifier = Modifier
+                            colors = CardDefaults.cardColors(
+                                containerColor =colorResource(id = R.color.color_primary) ,
+                                contentColor =colorResource(id = R.color.color_light)
+                            ),
+                            onClick = {
+                                showBottomSheet = true
+
+                            }, modifier = Modifier
                                 .padding(16.dp)
                                 .size(200.dp)
                                 .width(100.dp)
@@ -136,6 +144,8 @@ fun ResourcesPage(navController: NavHostController) {
                         }
                         if (showBottomSheet) {
                             ModalBottomSheet(
+                                containerColor = colorResource(id = R.color.color_primary),
+                                contentColor = colorResource(id = R.color.color_light),
                                 onDismissRequest = { showBottomSheet = false }
                             ) {
                                 // Bottom sheet content
