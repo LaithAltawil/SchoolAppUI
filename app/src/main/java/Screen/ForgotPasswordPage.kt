@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.imeNestedScroll
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.AnnotatedString
@@ -72,8 +74,8 @@ fun Forgotpassword(){
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text(text = "Username") },
-                placeholder = { Text(text = "Enter Username") },
+                label = { Text(text = "old password") },
+                placeholder = { Text(text = "Enter old password") },
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth()
@@ -134,10 +136,11 @@ fun Forgotpassword(){
                 Button(
                     onClick = {  }, modifier = Modifier
                         .padding(16.dp)
-                        .width(200.dp)
+
                         .fillMaxWidth()
                         .imePadding()
                         .imeNestedScroll()
+                        .clip(RoundedCornerShape(6.dp))
 
                 ) {
                     Text(text = "Confirm", fontSize = 30.sp)

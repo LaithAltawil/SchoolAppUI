@@ -172,7 +172,7 @@ fun CounselorReq(navController: NavHostController) {
                         contentColor = colorResource(id = R.color.color_light) // Change the text color
                     )
                 ) {
-                    Text("Show Dialog")
+                    Text("conformation")
                 }
                 if (showDialog) {
                     AlertDialog(

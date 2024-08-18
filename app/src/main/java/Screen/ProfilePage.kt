@@ -108,7 +108,7 @@ fun RowScope.TableCell(
         text = text,
         modifier = Modifier
             .weight(weight)
-            .padding(12.dp), fontSize = 20.sp, color = Color.White
+            .padding(top = 12.dp), fontSize = 20.sp, color = Color.White
     )
 }
 

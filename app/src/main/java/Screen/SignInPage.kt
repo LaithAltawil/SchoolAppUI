@@ -54,21 +54,21 @@ fun SignInPage(
     ) {
         Column(
             modifier = Modifier
-                .padding(top = 10.dp)
+                .padding(top = 50.dp)
                 .imePadding()
                 .imeNestedScroll(),
             verticalArrangement = Arrangement.Center
         ) {
 
             Text(
-                text = "Sign In",
+                text = "Welcome to School",
                 modifier = Modifier
                     .padding(24.dp, bottom = 32.dp)
                     .imePadding()
                     .imeNestedScroll(),
                 color = colorResource(id = R.color.color_light),
                 textAlign = TextAlign.Left,
-                fontSize = 50.sp,
+                fontSize = 40.sp,
                 fontWeight = FontWeight.ExtraBold
             )
             OutlinedTextField(
@@ -83,7 +83,7 @@ fun SignInPage(
                     .imeNestedScroll(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when focused
-                    unfocusedBorderColor = Color.Gray, // Color of the border when not focused
+                    unfocusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when not focused
                     focusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when focused
                     unfocusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when not focused
                     cursorColor = colorResource(id = R.color.color_light), // Color of the cursor
@@ -104,7 +104,7 @@ fun SignInPage(
                     .imeNestedScroll(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when focused
-                    unfocusedBorderColor = Color.Gray, // Color of the border when not focused
+                    unfocusedBorderColor = colorResource(id = R.color.color_light), // Color of the border when not focused
                     focusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when focused
                     unfocusedLabelColor = colorResource(id = R.color.color_light), // Color of the label when not focused
                     cursorColor = colorResource(id = R.color.color_light), // Color of the cursor
@@ -135,7 +135,7 @@ fun SignInPage(
 
                 ClickableText(
 
-                    text = AnnotatedString("forgot password?\n click here"),
+                    text = AnnotatedString("forgot password?"),
                     onClick = {
                         OnNavigateToForgotPassword()
                     },

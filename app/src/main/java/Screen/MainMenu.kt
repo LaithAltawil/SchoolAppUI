@@ -42,9 +42,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -70,6 +73,28 @@ fun MainMenu(
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val name = "Laith"
+
+    val cardlist = remember {
+        mutableStateListOf(
+            HomeworkCardData("Mathematics",
+                "Complete exercises 1-10 on page 35"),
+            HomeworkCardData("History",
+                "Write a short essay on the French Revolution"),
+            HomeworkCardData(
+                "Science",
+                "Prepare for the lab experiment on photosynthesis",),
+            HomeworkCardData(
+                "English",
+                "Read chapters 4 and 5 of 'To Kill a Mockingbird'",),
+            HomeworkCardData("Art",
+                "Finish the still life painting"),
+            HomeworkCardData("Music",
+                "Practice scales and arpeggios for 30 minutes"),
+            HomeworkCardData(
+                "Physical Education",
+                "Complete the workout routine posted online")
+        )
+    }
 
     val mainmenuitem = listOf(
         mainmenuitems("Homeworks", painterResource(id = R.drawable.homework)) {
@@ -130,7 +155,7 @@ fun MainMenu(
                         )
                 },
             ) {
-                Column(modifier = Modifier.padding(it)) {
+                Column(modifier = Modifier.padding(it),horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Center) {
                     Card(
                         modifier = Modifier
                             .padding(16.dp)
@@ -164,18 +189,35 @@ fun MainMenu(
                     }
                     LazyColumn(
                         modifier = Modifier.padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
                         items(mainmenuitem) { item ->
                             Card(
                                 modifier = Modifier
                                     .padding(16.dp)
                                     .height(100.dp)
-                                    .width(300.dp),
+                                    .width(300.dp)
+                                    .clickable { item.onClick() },
                                 colors = androidx.compose.material3.CardDefaults.cardColors(
                                     containerColor = colorResource(id = R.color.color_primary)
                                 )
                             ) {
+                                Column(
+                                    modifier = Modifier
+                                        .padding(16.dp)
+                                        .size(300.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+
+                                    Text(
+                                        text = item.name,
+                                        fontSize = 20.sp,
+                                        color = colorResource(id = R.color.color_light)
+                                    )
+                                }
+
 
                             }
 
@@ -222,7 +264,10 @@ fun MainMenu(
         ) {
             Column(modifier = Modifier.padding(it)) {
 
-                Card(
+
+                LazyRow(modifier = Modifier.padding(start = 10.dp, end = 20.dp)) {
+                    items(cardlist) { item ->
+                        Card(
                     modifier = Modifier
                         .height(200.dp)
                         .width(400.dp)
@@ -238,25 +283,57 @@ fun MainMenu(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        Text(
+                            text = item.title,
+                            fontSize = 20.sp,
+                            color = colorResource(id = R.color.color_light)
+                        )
+                    }
+                }
+
 
 
                     }
 
                 }
 
+//leaving it here for now
 
+//                Card(
+//                    modifier = Modifier
+//                        .height(200.dp)
+//                        .width(400.dp)
+//                        .wrapContentSize(Alignment.Center),
+//                    colors = androidx.compose.material3.CardDefaults.cardColors(
+//                        containerColor = colorResource(id = R.color.color_primary)
+//                    )
+//                ) {
+//                    Column(
+//                        modifier = Modifier
+//                            .padding(16.dp)
+//                            .size(300.dp),
+//                        horizontalAlignment = Alignment.CenterHorizontally,
+//                        verticalArrangement = Arrangement.Center
+//                    ) {}
+//                }
+                Text(
+                    "Unfinished Homeworks",
+                    overflow = TextOverflow.Visible, fontSize = 35.sp,
+                    modifier = Modifier.padding(top=16.dp,bottom=16.dp, start = 10.dp),color = colorResource(id = R.color.color_light)
+                )
                 LazyColumn(
-                    modifier = Modifier.padding(start = 30.dp, end = 0.dp),
+                    modifier = Modifier.padding(start = 10.dp, end = 20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    items(mainmenuitem) { item ->
+                    items(cardlist) { item ->
                         Card(
                             modifier = Modifier
                                 .padding(16.dp)
-                                .height(150.dp)
-                                .width(300.dp)
-                                .clickable { item.onClick() }
-                                .wrapContentSize(Alignment.Center),
+                                .height(80.dp)
+                                .width(400.dp)
+                                .clickable { }
+                                .wrapContentSize(Alignment.Center)
+                                .clip(androidx.compose.foundation.shape.RoundedCornerShape(10.dp)),
                             colors = androidx.compose.material3.CardDefaults.cardColors(
                                 containerColor = colorResource(id = R.color.color_primary)
                             )
@@ -268,17 +345,12 @@ fun MainMenu(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Icon(
-                                    painter = item.ImagePath,
-                                    contentDescription = item.name,
-                                    modifier = Modifier.size(80.dp),
-                                    tint = colorResource(id = R.color.color_light)
-                                )
                                 Text(
-                                    text = item.name,
+                                    text = item.title,
                                     fontSize = 20.sp,
                                     color = colorResource(id = R.color.color_light)
                                 )
+
                             }
 
                         }
