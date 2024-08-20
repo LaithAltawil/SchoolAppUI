@@ -26,6 +26,7 @@ data class HomeworkCardData(
 )
 data class daysClasses(
     val Dayss: String,
+    val Classes:List<String>,
     var isExpanded:Boolean=false
 )
 

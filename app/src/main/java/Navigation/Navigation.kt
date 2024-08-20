@@ -1,5 +1,6 @@
 package Navigation
 
+import Screen.CLassesPage
 import Screen.CounselorReq
 import Screen.ExamsPage
 import Screen.Forgotpassword
@@ -44,7 +45,8 @@ fun Navigation(
                 MoveToResourcesPage = { navController.navigate(Screen.ResourcesPage.route) },
                 MoveToCalanderPage = { navController.navigate(Screen.CalenderPage.route) },
                 MoveToSettingsPage = { navController.navigate(Screen.SettingsPage.route) },
-                MoveToHomeworks2Page = {navController.navigate(Screen.HomeworksPage.route)}
+                MoveToHomeworks2Page = { navController.navigate(Screen.HomeworksPage.route) },
+                MoveToClassesPage = { navController.navigate(Screen.ClassesPage.route) }
             )
         }
 
@@ -75,8 +77,11 @@ fun Navigation(
 
         }
         composable(Screen.HomeworksPage.route) {
-            Stack035(navController)}
-
+            Stack035(navController)
+        }
+        composable(Screen.ClassesPage.route) {
+            CLassesPage(navController)
+        }
 
 
     }

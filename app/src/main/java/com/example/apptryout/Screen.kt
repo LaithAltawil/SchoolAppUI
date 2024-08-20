@@ -12,4 +12,5 @@ sealed class Screen(val route:String){
     object CalenderPage:Screen("Calender Page")
     object SettingsPage:Screen("SettingsPage")
     object HomeworksPage:Screen("HomeworksPage")
+    object ClassesPage:Screen("ClassesPage")
 }

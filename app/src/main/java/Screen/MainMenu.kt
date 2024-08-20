@@ -64,7 +64,8 @@ fun MainMenu(
     MoveToResourcesPage: () -> Unit,
     MoveToCalanderPage: () -> Unit,
     MoveToSettingsPage: () -> Unit,
-    MoveToHomeworks2Page: () -> Unit
+    MoveToHomeworks2Page: () -> Unit,
+    MoveToClassesPage: () -> Unit,
 ) {
     val Scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -105,7 +106,7 @@ fun MainMenu(
         mainmenuitems(
             "Classes", painterResource(id = R.drawable.baseline_schedule_24)
         ) {
-            MoveToExamsPage()
+            MoveToClassesPage()
         },
         mainmenuitems("Marks", painterResource(id = R.drawable.grade))
         {
