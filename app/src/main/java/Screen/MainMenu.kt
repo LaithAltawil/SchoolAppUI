@@ -8,6 +8,8 @@ package Screen
 //FIND AN ITDEA ON WHEN TO DO WITH THE SETTINGS PAGE
 
 
+import Screen.commons.HomeworkCardData
+import Screen.commons.mainmenuitems
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween

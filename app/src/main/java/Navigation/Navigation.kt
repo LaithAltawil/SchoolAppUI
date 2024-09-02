@@ -4,7 +4,8 @@ import Screen.CLassesPage
 import Screen.CounselorReq
 import Screen.ExamsPage
 import Screen.Forgotpassword
-import Screen.Homeworks
+import Screen.HomeWorks
+import Screen.commons.Homeworks
 import Screen.MainMenu
 import Screen.ProfilePage
 import Screen.ResourcesPage
@@ -59,7 +60,8 @@ fun Navigation(
         }
 
         composable(Screen.Homeworks.route) {
-            Homeworks(navController)
+            HomeWorks(navController = navController)
+
         }
 
         composable(Screen.ConselorReq.route) {
@@ -73,7 +75,7 @@ fun Navigation(
             calanderPage(navController)
         }
         composable(Screen.SettingsPage.route) {
-            settingspage(navController)
+            settingspage()
 
         }
         composable(Screen.HomeworksPage.route) {
